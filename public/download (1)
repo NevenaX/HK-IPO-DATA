@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Office temp files
+~$*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific - large binary source files (keep ppt in repo for sharing)
+# But ignore the root-level duplicate
+/2026基石_0622.pptx
+
+
+# Auto-generated name check report (regenerated on each extraction)
+data/新增名称检查.md
+
+# Netlify build output
+public/
