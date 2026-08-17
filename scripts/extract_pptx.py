@@ -393,7 +393,6 @@ def save_pptx_index(pptx_files: list[str], record_counts: dict[str, int] | None 
         basename = os.path.basename(f)
         sig = get_file_signature(f)
         processed[basename] = {
-            "mtime": sig["mtime"],
             "size": sig["size"],
             "record_count": record_counts.get(basename, 0) if record_counts else 0,
         }
