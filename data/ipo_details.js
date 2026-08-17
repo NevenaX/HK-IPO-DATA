@@ -1,6 +1,6 @@
 // ipo_details.js — 自动生成，请勿手动修改
-// 生成时间: 2026-08-17 03:23:35
-// 覆盖 160 只港股
+// 生成时间: 2026-08-17 04:15:09
+// 覆盖 161 只港股
 
 window.ipoDetails = {
   "0068.HK": {
@@ -1289,6 +1289,19 @@ window.ipoDetails = {
     "intl_sub_multiple": 13.34,
     "incorporation_date": "2005-08-29",
     "registered_capital": "1,516,201,463 CNY"
+  },
+  "3308.HK": {
+    "issue_price": null,
+    "net_proceeds_mn": null,
+    "sponsors": null,
+    "stabilizing_agent": null,
+    "lot_size": null,
+    "board": null,
+    "overallotment_shares": null,
+    "public_sub_multiple": null,
+    "intl_sub_multiple": null,
+    "incorporation_date": null,
+    "registered_capital": null
   },
   "3310.HK": {
     "issue_price": 20.81,
