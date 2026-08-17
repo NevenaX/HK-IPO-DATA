@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>港股 IPO 基石投资者数据库</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="data/data.js"></script>
+<script src="data/company_info.js"></script>
+<script src="data/ipo_details.js"></script>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Roboto, "Noto Sans SC", sans-serif; }
+
+  /* 表头排序箭头 */
+  .sortable { cursor: pointer; user-select: none; }
+  .sortable:hover { background-color: #f3f4f6; }
+  .sortable::after { content: " \2195"; opacity: 0.25; font-size: 0.7rem; margin-left: 2px; }
+  .sortable.asc::after { content: " \2191"; opacity: 0.8; }
+  .sortable.desc::after { content: " \2193"; opacity: 0.8; }
+
+  /* 类别标签 */
+  .tag-corp   { background: #dbeafe; color: #1e3a5f; }
+  .tag-gov    { background: #ede9fe; color: #4c1d95; }
+  .tag-preipo { background: #fef9c3; color: #854d0e; }
+  .tag-stra   { background: #d1fae5; color: #065f46; }
+  .tag-fin    { background: #fff7ed; color: #9a3412; }
+
+  /* 侧栏动画 */
+  #sidebar {
+    transition: transform 0.25s ease-in-out;
+    transform: translateX(100%);
+  }
+  #sidebar.open { transform: translateX(0); }
+  #sidebar-overlay {
+    transition: opacity 0.15s ease;
+    opacity: 0; pointer-events: none;
+  }
+  #sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+  /* 弹窗动画 */
+  #modal-overlay {
+    transition: opacity 0.15s ease;
+    opacity: 0; pointer-events: none;
+  }
+  #modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+  /* 滚动条 */
+  .table-wrap::-webkit-scrollbar { height: 5px; }
+  .table-wrap::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+  /* 表格行hover */
+  #table-body tr:hover { background-color: #f0fdf4; }
+  #table-body tr { transition: background-color 0.12s ease; }
+
+  .sortable-multi::after { content: none !important; }
+  .srt-arrow { opacity: 0.25; font-size: 0.65rem; margin-left: 2px; }
+  .sortable.asc .srt-arrow { opacity: 0.8; }
+  .sortable.desc .srt-arrow { opacity: 0.8; }
+
+  @media print { .no-print { display: none !important; } }
+</style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- ============================================================ -->
+<!-- 顶部标题栏 -->
+<!-- ============================================================ -->
+<header class="bg-white border-b border-gray-200 shadow-sm no-print">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-y-2">
+    <div>
+      <h1 class="text-base sm:text-lg font-bold text-gray-900">港股 IPO 基石投资者数据库</h1>
+      <p class="text-xs text-gray-400 mt-0.5" id="header-info">加载中…</p>
+    </div>
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <button onclick="resetFilters()" class="px-2.5 py-1.5 text-xs rounded border border-gray-300 bg-white hover:bg-gray-50 font-medium">重置筛选</button>
+      <button onclick="openSummaryModal()" class="px-2.5 py-1.5 text-xs rounded bg-emerald-600 text-white hover:bg-emerald-700 font-medium">复制汇总</button>
+      <button onclick="exportCSV()" class="px-2.5 py-1.5 text-xs rounded bg-blue-600 text-white hover:bg-blue-700 font-medium">导出筛选明细</button>
+      <button onclick="window.print()" class="px-2.5 py-1.5 text-xs rounded border border-gray-300 bg-white hover:bg-gray-50 font-medium">打印</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-3">
+
+<!-- ============================================================ -->
+<!-- 管理看板 -->
+<!-- ============================================================ -->
+<section id="dashboard" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></section>
+
+<!-- ============================================================ -->
+<!-- 搜索与筛选 -->
+<!-- ============================================================ -->
+<section class="bg-white rounded-lg border border-gray-200 p-3 no-print">
+  <div class="flex flex-wrap items-end gap-x-3 gap-y-2">
+
+    <!-- 搜索框 -->
+    <div class="flex-1 min-w-[180px]">
+      <label class="block text-[11px] text-gray-400 mb-0.5 font-medium">搜索</label>
+      <input id="search-input" type="text" placeholder="投资者 / 公司 / 股票代码" oninput="scheduleFilter()"
+             class="w-full px-2.5 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+
+    <!-- 年份 -->
+    <div class="w-24">
+      <label class="block text-[11px] text-gray-400 mb-0.5 font-medium">上市年份</label>
+      <select id="filter-year" onchange="applyFilters()"
+              class="w-full px-2 py-1.5 border border-gray-300 rounded text-xs bg-white"></select>
+    </div>
+
+    <!-- 行业 -->
+    <div class="w-36">
+      <label class="block text-[11px] text-gray-400 mb-0.5 font-medium">行业</label>
+      <select id="filter-industry" onchange="applyFilters()"
+              class="w-full px-2 py-1.5 border border-gray-300 rounded text-xs bg-white"></select>
+    </div>
+
+    <!-- 金额范围 -->
+    <div class="flex items-end gap-1.5">
+      <div class="w-20">
+        <label class="block text-[11px] text-gray-400 mb-0.5 font-medium">金额 ≥</label>
+        <input id="amount-min" type="number" min="0" step="1" placeholder="0"
+               oninput="scheduleFilter()"
+               class="w-full px-2 py-1.5 border border-gray-300 rounded text-xs">
+      </div>
+      <div class="w-20">
+        <label class="block text-[11px] text-gray-400 mb-0.5 font-medium">金额 ≤</label>
+        <input id="amount-max" type="number" min="0" step="1" placeholder="9999"
+               oninput="scheduleFilter()"
+               class="w-full px-2 py-1.5 border border-gray-300 rounded text-xs">
+      </div>
+      <span class="text-[11px] text-gray-400 pb-1">百万美元</span>
+    </div>
+  </div>
+
+  <!-- 投资者类别（横向排列） -->
+  <div class="mt-2 flex flex-wrap items-center gap-1.5">
+    <span class="text-[11px] text-gray-400 font-medium mr-0.5">类别：</span>
+    <div id="category-chips" class="flex flex-wrap gap-1"></div>
+  </div>
+
+  <!-- 结果计数 -->
+  <div class="mt-1.5 text-[11px] text-gray-400" id="result-count"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 结果表格 -->
+<!-- ============================================================ -->
+<section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+  <div class="table-wrap overflow-x-auto">
+    <table class="w-full" style="min-width: 900px;">
+      <thead>
+        <tr class="bg-gray-50 border-b border-gray-200">
+          <th class="sortable px-2 py-2 text-left text-[11px] font-medium text-gray-500 w-7">#</th>
+          <th class="sortable px-2 py-2.5 text-left text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="listing_date">上市日期</th>
+          <th class="sortable px-2 py-2.5 text-left text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="stock_code">股票代码</th>
+          <th class="sortable px-2 py-2.5 text-left text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="company_name">公司</th>
+          <th class="sortable px-2 py-2.5 text-left text-[11px] font-medium text-gray-500" data-field="industry">行业</th>
+          <th class="sortable sortable-multi px-2 py-2.5 text-center text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="ipo_size_mn"><span class="leading-snug"><span class="block">发行规模 <span class="srt-arrow">↕</span></span><span class="block text-[10px] text-gray-400 font-normal">（百万美元）</span></span></th>
+          <th class="sortable sortable-multi px-2 py-2.5 text-center text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="cs_size_mn"><span class="leading-snug"><span class="block">基石规模 <span class="srt-arrow">↕</span></span><span class="block text-[10px] text-gray-400 font-normal">（百万美元）</span></span></th>
+          <th class="sortable px-2 py-2.5 text-right text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="cs_ratio">基石占比</th>
+          <th class="sortable px-2 py-2.5 text-left text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="investor_name">基石投资者</th>
+          <th class="sortable px-2 py-2.5 text-left text-[11px] font-medium text-gray-500" data-field="investor_category">类别</th>
+          <th class="sortable sortable-multi px-2 py-2.5 text-center text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="amount_mn"><span class="leading-snug"><span class="block">投资金额 <span class="srt-arrow">↕</span></span><span class="block text-[10px] text-gray-400 font-normal">（百万美元）</span></span></th>
+          <th class="sortable sortable-multi px-2 py-2.5 text-center text-[11px] font-medium text-gray-500 whitespace-nowrap" data-field="unlock_return"><span class="leading-snug"><span class="block">解禁收益率 <span class="srt-arrow">↕</span></span><span class="block text-[10px] text-gray-400 font-normal">（相较发行价）</span></span></th>
+        </tr>
+      </thead>
+      <tbody id="table-body" class="divide-y divide-gray-100"></tbody>
+    </table>
+  </div>
+
+  <!-- 分页 -->
+  <div class="flex items-center justify-between px-3 py-1.5 border-t border-gray-200 bg-gray-50 no-print">
+    <div class="text-[11px] text-gray-400">
+      显示 <span id="page-info-from">1</span>–<span id="page-info-to">20</span> 条，
+      共 <span id="page-info-total">0</span> 条
+    </div>
+    <div class="flex items-center gap-1">
+      <button onclick="goPage(-1)" class="px-2 py-1 text-[11px] rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40 font-medium" id="btn-prev">上一页</button>
+      <span class="px-2 text-[11px] text-gray-500" id="page-num">1 / 1</span>
+      <span class="text-[11px] text-gray-300">跳至</span>
+      <input id="page-input" type="number" min="1" value="1" onkeydown="if(event.key==='Enter')jumpToPage()" class="w-12 px-1.5 py-0.5 border border-gray-300 rounded text-[11px] text-center font-mono">
+      <span class="text-[11px] text-gray-300">页</span>
+      <button onclick="goPage(1)" class="px-2 py-1 text-[11px] rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40 font-medium" id="btn-next">下一页</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 底部信息 -->
+<!-- ============================================================ -->
+<footer class="text-center text-[11px] text-gray-400 py-3 no-print">
+  数据来源: Dealogic / HKEX &nbsp;|&nbsp; 数据仅供内部参考，不构成投资建议
+</footer>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- 投资者详情侧栏 -->
+<!-- ============================================================ -->
+<div id="sidebar-overlay" onclick="closeSidebar()" class="fixed inset-0 bg-black/15 z-40"></div>
+<aside id="sidebar" class="fixed top-0 right-0 h-full w-full sm:w-[350px] bg-white shadow-xl z-50 overflow-y-auto">
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-sm font-bold text-gray-900 truncate pr-2" id="sidebar-name">—</h2>
+      <button onclick="closeSidebar()" class="text-gray-300 hover:text-gray-600 text-lg leading-none flex-shrink-0">&times;</button>
+    </div>
+    <div class="space-y-2 text-xs" id="sidebar-body"></div>
+  </div>
+</aside>
+
+<!-- ============================================================ -->
+<!-- 汇总弹窗（取代"导出按投资者汇总"） -->
+<!-- ============================================================ -->
+<div id="modal-overlay" onclick="closeModal()" class="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[80vh] flex flex-col" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+      <h3 class="text-sm font-bold text-gray-900">按投资者汇总</h3>
+      <button onclick="closeModal()" class="text-gray-300 hover:text-gray-600 text-lg leading-none">&times;</button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-4 text-xs leading-relaxed whitespace-pre-wrap font-mono" id="modal-body">加载中…</div>
+    <div class="px-4 py-3 border-t border-gray-200 flex justify-end gap-2">
+      <button onclick="copyModalText()" class="px-3 py-1.5 text-xs rounded bg-emerald-600 text-white hover:bg-emerald-700 font-medium" id="modal-copy-btn">一键复制</button>
+      <button onclick="closeModal()" class="px-3 py-1.5 text-xs rounded border border-gray-300 bg-white hover:bg-gray-50 font-medium">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- JavaScript -->
+<!-- ============================================================ -->
+<script>
+// ============================================================
+// 状态
+// ============================================================
+const state = {
+  keyword: "",
+  year: "all",
+  industry: "all",
+  categories: [],
+  amountMin: null,
+  amountMax: null,
+  sortField: "listing_date",
+  sortOrder: "desc",
+  page: 1,
+  pageSize: 20,
+};
+
+let rawData = [];
+let filteredData = [];
+let filterTimer = null;
+
+/** 获取解禁收益率（上市后6个月收盘价 vs 发行价） */
+function getUnlockReturn(stockCode) {
+  if (window.companyInfo && window.companyInfo[stockCode]) {
+    const info = window.companyInfo[stockCode];
+    if (info.change_6m_pct != null) {
+      return info.change_6m_pct;
+    }
+  }
+  return null; // null = 未到解禁期
+}
+
+/** 获取上市日期（优先从 AKShare companyInfo 取，降级用 PPT 数据） */
+function getListingDate(stockCode) {
+  if (window.companyInfo && window.companyInfo[stockCode] && window.companyInfo[stockCode].listing_date) {
+    return window.companyInfo[stockCode].listing_date.split(' ')[0];
+  }
+  return null;
+}
+function getDataCutoff() {
+  if (typeof window.dataCutoff !== "undefined" && window.dataCutoff) {
+    return window.dataCutoff;
+  }
+  if (rawData.length) {
+    const dates = rawData.map(d => getListingDate(d.stock_code)).filter(Boolean).sort();
+    if (dates.length) return dates[dates.length - 1];
+  }
+  return "—";
+}
+
+const CAT_COLORS = {
+  "上下游企业": "tag-corp",
+  "政府基金":   "tag-gov",
+  "老股东":     "tag-preipo",
+  "战略合作":   "tag-stra",
+  "财务投资者": "tag-fin",
+};
+const CAT_ORDER = ["上下游企业", "政府基金", "老股东", "战略合作", "财务投资者"];
+
+// ============================================================
+// 初始化
+// ============================================================
+function init() {
+  if (typeof cornerstoneData === "undefined" || !cornerstoneData.length) {
+    document.getElementById("header-info").textContent = "data/data.js 未正确加载";
+    return;
+  }
+  rawData = cornerstoneData;
+
+  const companies = new Set(rawData.map(d => d.company_name).filter(Boolean));
+  const investors = new Set(rawData.map(d => d.investor_name).filter(Boolean));
+  const cutoff = getDataCutoff();
+  document.getElementById("header-info").textContent =
+    `数据截止: ${cutoff} ｜ ${companies.size} 个项目, ${investors.size} 位投资者`;
+
+  populateYearFilter();
+  populateIndustryFilter();
+  populateCategoryChips();
+  renderDashboard();
+  document.querySelectorAll(".sortable").forEach(th => {
+    th.addEventListener("click", () => toggleSort(th.dataset.field));
+  });
+  applyFilters();
+}
+
+// ============================================================
+// 筛选与排序
+// ============================================================
+function applyFilters() {
+  const kw = state.keyword.trim().toLowerCase();
+  const yr = state.year;
+  const ind = state.industry;
+  const cats = state.categories;
+  const min = state.amountMin;
+  const max = state.amountMax;
+
+  filteredData = rawData.filter(d => {
+    if (yr !== "all") {
+      const listingDate = getListingDate(d.stock_code);
+      const yearStr = listingDate ? listingDate.substring(0, 4) : "";
+      if (yearStr !== yr) return false;
+    }
+    if (kw) {
+      const m1 = d.investor_name && d.investor_name.toLowerCase().includes(kw);
+      const m2 = d.company_name && d.company_name.toLowerCase().includes(kw);
+      const m3 = d.stock_code && d.stock_code.toLowerCase().includes(kw);
+      if (!m1 && !m2 && !m3) return false;
+    }
+    if (ind !== "all") {
+      const mainInd = d.industry ? d.industry.split("/")[0].trim() : "";
+      if (mainInd !== ind) return false;
+    }
+    if (cats.length && !cats.includes(d.investor_category)) return false;
+    if (min !== null && (d.amount_mn === null || d.amount_mn < min)) return false;
+    if (max !== null && (d.amount_mn === null || d.amount_mn > max)) return false;
+    return true;
+  });
+  sortData();
+  state.page = 1;
+  render();
+}
+
+function sortData() {
+  const field = state.sortField;
+  const order = state.sortOrder;
+  filteredData.sort((a, b) => {
+    let va, vb;
+    if (field === "listing_date") {
+      va = getListingDate(a.stock_code) || "";
+      vb = getListingDate(b.stock_code) || "";
+    } else if (field === "unlock_return") {
+      va = getUnlockReturn(a.stock_code);
+      vb = getUnlockReturn(b.stock_code);
+      if (va === null) va = -999999;
+      if (vb === null) vb = -999999;
+    } else {
+      va = a[field];
+      vb = b[field];
+      if (va === null || va === undefined) va = "";
+      if (vb === null || vb === undefined) vb = "";
+    }
+    if (typeof va === "number" && typeof vb === "number") return order === "asc" ? va - vb : vb - va;
+    va = String(va); vb = String(vb);
+    return order === "asc" ? va.localeCompare(vb, "zh-CN") : vb.localeCompare(va, "zh-CN");
+  });
+}
+
+function toggleSort(field) {
+  if (state.sortField === field) {
+    state.sortOrder = state.sortOrder === "asc" ? "desc" : "asc";
+  } else {
+    state.sortField = field;
+    state.sortOrder = field === "listing_date" ? "desc" : "asc";
+  }
+  document.querySelectorAll(".sortable").forEach(th => {
+    th.classList.remove("asc", "desc");
+    if (th.dataset.field === field) th.classList.add(state.sortOrder);
+  });
+  // 同步更新多行表头的内联箭头
+  document.querySelectorAll(".srt-arrow").forEach(el => {
+    const th = el.closest(".sortable");
+    if (th.classList.contains("asc")) el.textContent = "↑";
+    else if (th.classList.contains("desc")) el.textContent = "↓";
+    else el.textContent = "↕";
+  });
+  sortData();
+  state.page = 1;
+  render();
+}
+
+function scheduleFilter() {
+  clearTimeout(filterTimer);
+  filterTimer = setTimeout(() => {
+    state.keyword = document.getElementById("search-input").value;
+    state.amountMin = parseFloat(document.getElementById("amount-min").value) || null;
+    state.amountMax = parseFloat(document.getElementById("amount-max").value) || null;
+    applyFilters();
+  }, 200);
+}
+
+// ============================================================
+// 渲染
+// ============================================================
+function render() {
+  const total = filteredData.length;
+  const ps = state.pageSize;
+  const maxPage = Math.max(1, Math.ceil(total / ps));
+  if (state.page > maxPage) state.page = maxPage;
+  const pg = state.page;
+  const from = (pg - 1) * ps;
+  const to = Math.min(pg * ps, total);
+  const pageData = filteredData.slice(from, to);
+
+  document.getElementById("result-count").textContent =
+    filteredData.length === rawData.length
+      ? `共 ${rawData.length} 条记录`
+      : `筛选结果: ${filteredData.length} / ${rawData.length} 条`;
+
+  document.getElementById("page-info-from").textContent = total ? from + 1 : 0;
+  document.getElementById("page-info-to").textContent = to;
+  document.getElementById("page-info-total").textContent = total;
+  document.getElementById("page-num").textContent = `${pg} / ${maxPage}`;
+  document.getElementById("page-input").value = pg;
+  document.getElementById("page-input").max = maxPage;
+  document.getElementById("btn-prev").disabled = pg <= 1;
+  document.getElementById("btn-next").disabled = pg >= maxPage;
+
+  const tbody = document.getElementById("table-body");
+  if (!pageData.length) {
+    tbody.innerHTML = `<tr><td colspan="12" class="px-3 py-10 text-center text-xs text-gray-400">暂无匹配结果，请调整筛选条件</td></tr>`;
+    return;
+  }
+
+  let html = "";
+  pageData.forEach((d, i) => {
+    const idx = from + i + 1;
+    const catClass = CAT_COLORS[d.investor_category] || "bg-gray-100 text-gray-600";
+    const amt = d.amount_mn != null ? fmtAmt(d.amount_mn) : "—";
+    const ipo = d.ipo_size_mn != null ? fmtAmt(d.ipo_size_mn) : "—";
+    const css = d.cs_size_mn != null ? fmtAmt(d.cs_size_mn) : "—";
+    const csr = d.cs_ratio || "—";
+    const safeName = escAttr(d.investor_name);
+
+    const C = "px-2 py-2.5 text-xs text-gray-700 whitespace-nowrap";
+    const CN = "px-2 py-2.5 text-xs text-gray-700 whitespace-nowrap font-mono text-center";
+    html += `<tr class="hover:bg-gray-50">`;
+    html += `<td class="px-2 py-2.5 text-xs text-gray-400 text-center font-mono">${idx}</td>`;
+    html += `<td class="${CN}">${getListingDate(d.stock_code) || d.pricing_date || "—"}</td>`;
+    html += `<td class="${CN}">${d.stock_code || "—"}</td>`;
+    html += `<td class="${C} font-medium text-left"><a href="#" onclick="event.preventDefault();openCompanySidebar('${escAttr(d.stock_code || d.company_name)}')" class="text-blue-600 hover:underline">${escHtml(d.company_name || "—")}</a></td>`;
+    html += `<td class="${C} text-left max-w-[100px] truncate" title="${escAttr(d.industry || "")}">${escHtml(d.industry || "—")}</td>`;
+    html += `<td class="${CN}">${ipo}</td>`;
+    html += `<td class="${CN}">${css}</td>`;
+    html += `<td class="${CN}">${csr}</td>`;
+    html += `<td class="${C} text-left"><a href="#" onclick="event.preventDefault();openSidebar('${safeName}')" class="text-blue-600 hover:underline font-medium">${escHtml(d.investor_name)}</a></td>`;
+    html += `<td class="px-2 py-2.5 text-xs whitespace-nowrap text-center"><span class="inline-block px-1.5 py-0.5 rounded ${catClass} font-medium">${escHtml(d.investor_category)}</span></td>`;
+    html += `<td class="${CN} font-semibold">${amt}</td>`;
+    // 解禁收益率
+    const unlockRet = getUnlockReturn(d.stock_code);
+    let unlockStr = '-';
+    let unlockColor = '';
+    if (unlockRet !== null) {
+      unlockStr = (unlockRet >= 0 ? '+' : '') + unlockRet.toFixed(2) + '%';
+      unlockColor = unlockRet >= 0 ? 'text-green-600' : 'text-red-600';
+    }
+    html += `<td class="${CN} ${unlockColor} font-semibold">${unlockStr}</td>`;
+    html += `</tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+function goPage(delta) {
+  const maxPage = Math.max(1, Math.ceil(filteredData.length / state.pageSize));
+  const np = Math.max(1, Math.min(maxPage, state.page + delta));
+  if (np !== state.page) { state.page = np; render(); }
+}
+
+function jumpToPage() {
+  const input = document.getElementById("page-input");
+  const maxPage = Math.max(1, Math.ceil(filteredData.length / state.pageSize));
+  let target = parseInt(input.value, 10);
+  if (isNaN(target) || target < 1) target = 1;
+  if (target > maxPage) target = maxPage;
+  if (target !== state.page) { state.page = target; render(); }
+  input.value = target;
+}
+
+// ============================================================
+// 管理看板
+// ============================================================
+function renderDashboard() {
+  // 按年份分组
+  const byYear = {};
+  rawData.forEach(d => {
+    const ld = getListingDate(d.stock_code);
+    const year = ld ? ld.substring(0, 4) : "未知";
+    if (!byYear[year]) byYear[year] = { companies: new Set(), amt: 0 };
+    if (d.company_name) byYear[year].companies.add(d.company_name);
+    byYear[year].amt += d.amount_mn || 0;
+  });
+
+  const years = Object.keys(byYear).filter(y => y !== "未知").sort().reverse();
+  const companies = new Set(rawData.map(d => d.company_name).filter(Boolean));
+  const totalAmt = rawData.reduce((s, d) => s + (d.amount_mn || 0), 0);
+  const dataCutoff = getDataCutoff();
+
+  // 年份项目数统计行
+  const yearProjectHtml = years.map(y =>
+    `<div class="flex items-center justify-between text-[11px]">
+      <span class="text-gray-500">${y}年</span>
+      <span class="font-semibold text-gray-700">${byYear[y].companies.size} 个</span>
+    </div>`
+  ).join("");
+
+  // 年份金额统计行
+  const yearAmtHtml = years.map(y =>
+    `<div class="flex items-center justify-between text-[11px]">
+      <span class="text-gray-500">${y}年</span>
+      <span class="font-semibold text-gray-700 font-mono">$${fmtAmtSimple(byYear[y].amt)}M</span>
+    </div>`
+  ).join("");
+
+  const invMap = {};
+  rawData.forEach(d => {
+    if (!d.investor_name) return;
+    if (!invMap[d.investor_name]) invMap[d.investor_name] = { c: 0 };
+    invMap[d.investor_name].c++;
+  });
+  const top3 = Object.entries(invMap).sort((a, b) => b[1].c - a[1].c).slice(0, 3);
+
+  const container = document.getElementById("dashboard");
+  container.innerHTML = `
+    <div class="bg-white rounded-lg border-l-4 border-l-blue-400 shadow-sm p-4 flex flex-col justify-between">
+      <div class="text-[11px] text-blue-500 font-medium">项目总数</div>
+      <div class="mt-2 flex items-baseline gap-1.5">
+        <span class="text-3xl sm:text-4xl font-bold text-gray-800">${companies.size}</span>
+        <span class="text-xs text-gray-400">个 IPO</span>
+      </div>
+      <div class="mt-2 space-y-1 border-t border-gray-100 pt-2">${yearProjectHtml}</div>
+      <div class="mt-1 text-[10px] text-gray-300">数据截止 ${dataCutoff}</div>
+    </div>
+    <div class="bg-white rounded-lg border-l-4 border-l-teal-400 shadow-sm p-4 flex flex-col justify-between">
+      <div class="text-[11px] text-teal-500 font-medium">基石总额</div>
+      <div class="mt-2 flex items-baseline gap-1.5">
+        <span class="text-3xl sm:text-4xl font-bold text-gray-800">${fmtAmtSimple(totalAmt)}</span>
+        <span class="text-xs text-gray-400">百万美元</span>
+      </div>
+      <div class="mt-2 space-y-1 border-t border-gray-100 pt-2">${yearAmtHtml}</div>
+      <div class="mt-1 text-[10px] text-gray-300">基石投资者认购总规模</div>
+    </div>
+    <div class="bg-white rounded-lg border-l-4 border-l-amber-400 shadow-sm p-4">
+      <div class="text-[11px] text-amber-500 font-medium">最活跃基石投资者</div>
+      <div class="mt-3 space-y-2">
+        ${top3.map(([name, info], i) => `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold ${i === 0 ? 'bg-amber-400 text-white' : 'bg-gray-200 text-gray-400'}">${i + 1}</span>
+              <span class="text-xs text-gray-600 truncate">${escHtml(name)}</span>
+            </div>
+            <span class="text-xs text-gray-400 font-mono">${info.c} 次</span>
+          </div>
+        `).join("")}
+      </div>
+      <div class="mt-2 pt-2 border-t border-gray-100 text-[10px] text-gray-300">
+        按参与项目数排序
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+// 投资者详情侧栏
+// ============================================================
+function openSidebar(name) {
+  const records = rawData.filter(d => d.investor_name === name);
+  if (!records.length) return;
+
+  const totalAmt = records.reduce((s, d) => s + (d.amount_mn || 0), 0);
+  const projects = {};
+  records.forEach(d => {
+    const k = d.company_name || d.stock_code;
+    if (!projects[k]) projects[k] = { ...d, amt: 0 };
+    projects[k].amt += d.amount_mn || 0;
+  });
+  const list = Object.values(projects).sort((a, b) => {
+    const da = getListingDate(a.stock_code) || a.pricing_date || "";
+    const db = getListingDate(b.stock_code) || b.pricing_date || "";
+    return da < db ? 1 : -1;
+  });
+  const cat = records[0].investor_category;
+  const dates = records.map(d => getListingDate(d.stock_code) || d.pricing_date).filter(Boolean).sort();
+  const safeName = escAttr(name);
+
+  document.getElementById("sidebar-name").textContent = name;
+  document.getElementById("sidebar-body").innerHTML = `
+    <div><span class="inline-block px-1.5 py-0.5 rounded text-[11px] font-medium ${CAT_COLORS[cat] || "bg-gray-100"}">${cat}</span></div>
+    <div class="grid grid-cols-2 gap-2 bg-gray-50 rounded p-2.5 mt-2">
+      <div><span class="text-gray-400 text-[11px]">参与项目</span><div class="font-bold text-sm">${Object.keys(projects).length} 个</div></div>
+      <div><span class="text-gray-400 text-[11px]">总投资额</span><div class="font-bold text-sm">${fmtAmt(Math.round(totalAmt))} 百万美元</div></div>
+      <div><span class="text-gray-400 text-[11px]">首次投资</span><div class="font-medium text-xs">${dates[0] || "—"}</div></div>
+      <div><span class="text-gray-400 text-[11px]">最近投资</span><div class="font-medium text-xs">${dates[dates.length - 1] || "—"}</div></div>
+    </div>
+    <div class="text-xs font-medium text-gray-700 mt-3 mb-1.5">投资项目明细</div>
+    <div class="space-y-1.5" id="sidebar-projects"></div>
+    <div class="mt-2 flex gap-1.5">
+      <button onclick="exportOneInvestorCSV('${safeName}')" class="flex-1 px-2 py-1.5 text-[11px] rounded bg-blue-600 text-white hover:bg-blue-700 font-medium">导出 CSV</button>
+    </div>`;
+
+  document.getElementById("sidebar-projects").innerHTML = list.map(p =>
+    `<div class="border border-gray-200 rounded p-2.5">
+      <div class="text-xs font-medium">${escHtml(p.company_name || p.stock_code)}</div>
+      <div class="text-[11px] text-gray-400 mt-0.5">${p.stock_code || "—"} | ${getListingDate(p.stock_code) || p.pricing_date || "—"}${p.industry ? ` | ${escHtml(p.industry)}` : ""}</div>
+      <div class="text-xs font-mono mt-0.5 text-blue-700">${fmtAmt(p.amt)} 百万美元</div>
+    </div>`
+  ).join("");
+
+  document.getElementById("sidebar-overlay").classList.add("open");
+  document.getElementById("sidebar").classList.add("open");
+}
+
+function closeSidebar() {
+  document.getElementById("sidebar-overlay").classList.remove("open");
+  document.getElementById("sidebar").classList.remove("open");
+}
+
+// ============================================================
+// 公司详情侧栏（Skill 5）
+// ============================================================
+function openCompanySidebar(stockCode) {
+  // 从 cornerstoneData 中找该公司记录
+  const record = rawData.find(d => d.stock_code === stockCode);
+  if (!record && !window.companyInfo?.[stockCode]) return;
+
+  const info = window.companyInfo?.[stockCode] || {};
+  const ipoDetail = window.ipoDetails?.[stockCode];
+  const companyName = info.company_name || record?.company_name || stockCode;
+
+  	  // 收集该公司的所有基石投资者
+	  const csRecords = rawData.filter(d => d.stock_code === stockCode);
+
+	  // 基石投资者列表（平铺展示，不分类）
+	  const csInvestorsHtml = csRecords.map(d =>
+	    `<div class="flex justify-between text-xs py-0.5">
+	      <span class="text-gray-700">${escHtml(d.investor_name)}</span>
+	      <span class="font-mono text-gray-500">${fmtAmt(d.amount_mn)} 百万美元</span>
+	    </div>`
+	  ).join("");
+
+  // 上市表现
+  const issuePrice = info.issue_price;
+  const firstDayChg = info.first_day_change_pct;
+  const chg6m = info.change_6m_pct;
+  const firstDayStr = firstDayChg != null
+    ? `<span class="${firstDayChg >= 0 ? 'text-green-600' : 'text-red-600'}">${firstDayChg >= 0 ? '+' : ''}${firstDayChg.toFixed(2)}%</span>`
+    : '<span class="text-gray-400">暂无数据</span>';
+  const chg6mStr = chg6m != null
+    ? `<span class="${chg6m >= 0 ? 'text-green-600' : 'text-red-600'}">${chg6m >= 0 ? '+' : ''}${chg6m.toFixed(2)}%</span>`
+    : '<span class="text-gray-400">暂无数据</span>';
+
+  document.getElementById("sidebar-name").innerHTML = `
+    <div class="text-sm font-bold text-gray-900">${escHtml(companyName)}</div>
+    <div class="text-[11px] text-gray-400 font-normal">${escHtml(stockCode)}${info.industry ? ' · ' + escHtml(info.industry) : ''}</div>`;
+
+  const body = document.getElementById("sidebar-body");
+  body.innerHTML = `
+    <div class="space-y-2 text-xs">
+
+      ${info.board || issuePrice || info.listing_date || (record && record.ipo_size_mn) || ipoDetail ? `
+      <div>
+        <div class="text-xs font-semibold text-emerald-700 mb-2.5 pl-2 border-l-2 border-emerald-400">发行详情</div>
+        <div class="grid grid-cols-2 gap-x-3 gap-y-1.5">
+          ${info.board ? `<div><span class="text-gray-400">上市板块</span><div class="font-medium">${escHtml(info.board)}</div></div>` : ''}
+          ${info.listing_date ? `<div><span class="text-gray-400">上市日期</span><div class="font-medium">${info.listing_date.split(' ')[0]}</div></div>` : ''}
+          ${issuePrice ? `<div><span class="text-gray-400">发行价</span><div class="font-medium">${issuePrice.toFixed(2)} HKD</div></div>` : ''}
+          ${info.issue_num ? `<div><span class="text-gray-400">发行股数</span><div class="font-medium">${(info.issue_num / 10000).toFixed(0)} 万股</div></div>` : ''}
+          ${record && record.ipo_size_mn ? `<div><span class="text-gray-400">募资金额</span><div class="font-medium">${fmtAmt(record.ipo_size_mn)} 百万美元</div></div>` : ''}
+          ${ipoDetail && ipoDetail.net_proceeds_mn != null ? `<div><span class="text-gray-400">募资净额</span><div class="font-medium">${ipoDetail.net_proceeds_mn.toFixed(1)} 百万港元</div></div>` : ''}
+          ${ipoDetail && ipoDetail.public_sub_multiple != null ? `<div><span class="text-gray-400">公开认购倍数</span><div class="font-medium">${ipoDetail.public_sub_multiple.toFixed(0)}x${ipoDetail.intl_sub_multiple != null ? ` / 国际 ${ipoDetail.intl_sub_multiple.toFixed(1)}x` : ''}</div></div>` : ''}
+          ${ipoDetail && ipoDetail.lot_size != null ? `<div><span class="text-gray-400">每手股数</span><div class="font-medium">${ipoDetail.lot_size} 股</div></div>` : (info.trade_unit ? `<div><span class="text-gray-400">每手股数</span><div class="font-medium">${info.trade_unit} 股</div></div>` : '')}
+          ${ipoDetail && ipoDetail.overallotment_shares != null ? `<div><span class="text-gray-400">超额配售</span><div class="font-medium">${(ipoDetail.overallotment_shares / 10000).toFixed(0)} 万股</div></div>` : ''}
+        </div>
+
+        ${record ? `
+        <div class="grid grid-cols-3 gap-1.5 mt-2">
+          <div class="bg-emerald-50 rounded p-1.5 text-center">
+            <div class="text-gray-400 text-[10px]">发行总规模</div>
+            <div class="font-bold text-xs mt-0.5">${fmtAmt(record.ipo_size_mn)}</div>
+            <div class="text-[9px] text-gray-400">百万美元</div>
+          </div>
+          <div class="bg-emerald-50 rounded p-1.5 text-center">
+            <div class="text-gray-400 text-[10px]">基石规模</div>
+            <div class="font-bold text-xs mt-0.5">${fmtAmt(record.cs_size_mn)}</div>
+            <div class="text-[9px] text-gray-400">百万美元</div>
+          </div>
+          <div class="bg-emerald-50 rounded p-1.5 text-center">
+            <div class="text-gray-400 text-[10px]">基石占比</div>
+            <div class="font-bold text-xs mt-0.5">${record.cs_ratio || '—'}</div>
+            <div class="text-[9px] text-gray-400">占总发行</div>
+          </div>
+        </div>` : ''}
+
+        ${ipoDetail && ipoDetail.sponsors ? `
+        <div class="text-xs mt-1.5 pt-1.5 border-t border-gray-50">
+          <span class="text-gray-400">保荐人</span>
+          <div class="font-medium mt-0.5 leading-relaxed">${escHtml(ipoDetail.sponsors)}</div>
+        </div>` : ''}
+        ${ipoDetail && ipoDetail.stabilizing_agent ? `
+        <div class="text-xs mt-1">
+          <span class="text-gray-400">稳价人</span>
+          <div class="font-medium mt-0.5">${escHtml(ipoDetail.stabilizing_agent)}</div>
+        </div>` : ''}
+      </div>` : ''}
+
+      ${csRecords.length ? `
+      <div class="mt-2.5">
+        <div class="text-xs font-semibold text-blue-700 mb-2.5 pl-2 border-l-2 border-blue-400">基石投资者（${csRecords.length} 家）</div>
+        ${csInvestorsHtml}
+      </div>` : ''}
+
+      <div class="mt-2.5">
+        <div class="text-xs font-semibold text-amber-700 mb-2.5 pl-2 border-l-2 border-amber-400">上市表现</div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-gray-50 rounded p-2">
+            <div class="text-gray-400 text-[10px]">上市首日涨跌幅</div>
+            <div class="font-bold text-sm mt-0.5">${firstDayStr}</div>
+          </div>
+          <div class="bg-gray-50 rounded p-2">
+            <div class="text-gray-400 text-[10px]">解禁收益率</div>
+            <div class="font-bold text-sm mt-0.5">${chg6mStr}</div>
+            <div class="text-[9px] text-gray-300 mt-0.5">锁定期6个月</div>
+          </div>
+        </div>
+        ${info.last_close ? `<div class="text-[10px] text-gray-400 mt-1">最新收盘价: ${info.last_close.toFixed(2)} HKD（${info.latest_price_date || "—"}）</div>` : ''}
+      </div>
+
+      ${info.company_profile ? `
+      <div class="mt-2.5">
+        <div class="text-xs font-semibold text-slate-700 mb-2.5 pl-2 border-l-2 border-slate-400">公司简介</div>
+        <div class="text-xs text-gray-600 leading-relaxed">${escHtml(info.company_profile)}</div>
+      </div>` : ''}
+
+      <div class="pt-1 flex gap-1.5 border-t border-gray-100">
+        ${info.website ? `<a href="https://${info.website.replace(/^https?:\/\//, '')}" target="_blank" class="text-[11px] text-blue-600 hover:underline">官网</a>` : ''}
+      </div>
+    </div>`;
+
+  document.getElementById("sidebar-overlay").classList.add("open");
+  document.getElementById("sidebar").classList.add("open");
+}
+
+// ============================================================
+// 汇总弹窗（取代"导出按投资者汇总"CSV）
+// ============================================================
+function openSummaryModal() {
+  const data = filteredData.length ? filteredData : rawData;
+
+  // 按投资者分组
+  const groups = {};
+  data.forEach(d => {
+    if (!d.investor_name) return;
+    if (!groups[d.investor_name]) groups[d.investor_name] = { name: d.investor_name, cat: d.investor_category, proj: [], total: 0 };
+    const key = d.company_name || d.stock_code;
+    if (!groups[d.investor_name].proj.some(p => p.name === key)) {
+      groups[d.investor_name].proj.push({ name: key, amt: 0 });
+    }
+    const p = groups[d.investor_name].proj.find(p => p.name === key);
+    p.amt += d.amount_mn || 0;
+    groups[d.investor_name].total += d.amount_mn || 0;
+  });
+
+  // 排序：按项目数降序
+  const sorted = Object.values(groups).sort((a, b) => b.proj.length - a.proj.length);
+
+  // 构建文本
+  let text = "";
+  sorted.forEach(g => {
+    text += `${g.name}（${g.proj.length} 个项目，合计 ${fmtAmt(g.total)} 百万美元）\n`;
+    g.proj.forEach(p => {
+      text += `  ${p.name}（${fmtAmt(p.amt)} 百万美元）\n`;
+    });
+    text += `\n`;
+  });
+  text += `--- 共 ${sorted.length} 位投资者 ---`;
+
+  document.getElementById("modal-body").textContent = text;
+  document.getElementById("modal-overlay").classList.add("open");
+}
+
+function closeModal() {
+  document.getElementById("modal-overlay").classList.remove("open");
+}
+
+function copyModalText() {
+  const text = document.getElementById("modal-body").textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("modal-copy-btn");
+    btn.textContent = "已复制";
+    setTimeout(() => { btn.textContent = "一键复制"; }, 1500);
+  }).catch(() => {
+    // 降级方案
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    const btn = document.getElementById("modal-copy-btn");
+    btn.textContent = "已复制";
+    setTimeout(() => { btn.textContent = "一键复制"; }, 1500);
+  });
+}
+
+// ============================================================
+// 辅助 UI
+// ============================================================
+function populateYearFilter() {
+  const years = new Set();
+  rawData.forEach(d => {
+    const ld = getListingDate(d.stock_code);
+    if (ld && ld.length >= 4) years.add(ld.substring(0, 4));
+  });
+  const sel = document.getElementById("filter-year");
+  sel.innerHTML = '<option value="all">全部</option>' +
+    Array.from(years).sort().reverse().map(y =>
+      `<option value="${y}">${y}年</option>`
+    ).join("");
+  sel.onchange = () => { state.year = sel.value; applyFilters(); };
+}
+
+function populateIndustryFilter() {
+  const set = new Set();
+  rawData.forEach(d => { if (d.industry) set.add(d.industry.split("/")[0].trim()); });
+  const sel = document.getElementById("filter-industry");
+  sel.innerHTML = '<option value="all">全部</option>' +
+    Array.from(set).sort((a, b) => a.localeCompare(b, "zh-CN"))
+      .map(s => `<option value="${escAttr(s)}">${escHtml(s)}</option>`).join("");
+  sel.onchange = () => { state.industry = sel.value; applyFilters(); };
+}
+
+function populateCategoryChips() {
+  const container = document.getElementById("category-chips");
+  const isAll = state.categories.length === 0;
+  container.innerHTML = CAT_ORDER.map(cat => {
+    const active = isAll || state.categories.includes(cat);
+    return `<label class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] cursor-pointer border transition-all font-medium ${
+      active ? (CAT_COLORS[cat] || "bg-gray-100") + " border-transparent"
+             : "bg-white border-gray-300 text-gray-400"
+    }">
+      <input type="checkbox" class="hidden" value="${escAttr(cat)}" ${active ? "checked" : ""} onchange="toggleCategory('${escAttr(cat)}')">
+      ${cat}
+    </label>`;
+  }).join("");
+}
+
+function toggleCategory(cat) {
+  const idx = state.categories.indexOf(cat);
+  if (idx >= 0) state.categories.splice(idx, 1);
+  else state.categories.push(cat);
+  if (state.categories.length === CAT_ORDER.length) state.categories = [];
+  populateCategoryChips();
+  applyFilters();
+}
+
+function resetFilters() {
+  state.keyword = ""; state.year = "all"; state.industry = "all"; state.categories = [];
+  state.amountMin = null; state.amountMax = null;
+  state.sortField = "listing_date"; state.sortOrder = "desc"; state.page = 1;
+  document.getElementById("search-input").value = "";
+  document.getElementById("filter-year").value = "all";
+  document.getElementById("filter-industry").value = "all";
+  document.getElementById("amount-min").value = "";
+  document.getElementById("amount-max").value = "";
+  populateCategoryChips();
+  document.querySelectorAll(".sortable").forEach(th => th.classList.remove("asc", "desc"));
+  document.querySelector('.sortable[data-field="listing_date"]')?.classList.add("desc");
+  applyFilters();
+}
+
+// ============================================================
+// 导出 CSV
+// ============================================================
+function arrayToCSV(rows, headers) {
+  const lines = [headers.join(",")];
+  rows.forEach(row => {
+    const vals = headers.map(h => {
+      const v = row[h]; if (v === null || v === undefined) return "";
+      const s = String(v);
+      return s.includes(",") || s.includes('"') ? `"${s.replace(/"/g, '""')}"` : s;
+    });
+    lines.push(vals.join(","));
+  });
+  return "﻿" + lines.join("\n");
+}
+
+function downloadCSV(content, fn) {
+  const blob = new Blob([content], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = fn; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function ts() {
+  const d = new Date();
+  return d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+}
+
+/** 导出筛选明细 */
+function exportCSV() {
+  const src = filteredData.length ? filteredData : rawData;
+  const data = src.map(d => ({
+    listing_date: getListingDate(d.stock_code) || d.pricing_date || "",
+    stock_code: d.stock_code,
+    company_name: d.company_name,
+    industry: d.industry,
+    ipo_size_mn: d.ipo_size_mn,
+    cs_size_mn: d.cs_size_mn,
+    cs_ratio: d.cs_ratio,
+    investor_name: d.investor_name,
+    investor_category: d.investor_category,
+    amount_mn: d.amount_mn,
+  }));
+  const h = ["listing_date","stock_code","company_name","industry","ipo_size_mn","cs_size_mn","cs_ratio","investor_name","investor_category","amount_mn"];
+  downloadCSV(arrayToCSV(data, h), `cornerstone_detail_${ts()}.csv`);
+}
+
+/** 导出单个投资者 CSV（侧栏） */
+function exportOneInvestorCSV(name) {
+  const records = rawData.filter(d => d.investor_name === name);
+  if (!records.length) return;
+  const projects = {};
+  records.forEach(d => {
+    const k = d.company_name || d.stock_code;
+    if (!projects[k]) projects[k] = { company_name: d.company_name, stock_code: d.stock_code, listing_date: getListingDate(d.stock_code) || d.pricing_date || "", industry: d.industry, amount_mn: 0 };
+    projects[k].amount_mn += d.amount_mn || 0;
+  });
+  const rows = Object.values(projects).sort((a, b) => (a.listing_date || "") < (b.listing_date || "") ? 1 : -1);
+  const h = ["investor_name","company_name","stock_code","listing_date","industry","amount_mn"];
+  rows.forEach(r => r.investor_name = name);
+  const safe = name.replace(/[\\/:*?"<>|]/g, "_");
+  downloadCSV(arrayToCSV(rows, h), `${safe}_${ts()}.csv`);
+}
+
+// ============================================================
+// 工具
+// ============================================================
+/** 简化金额格式化（无小数位，千分位逗号） */
+function fmtAmtSimple(n) {
+  if (n === null || n === undefined || isNaN(n)) return "—";
+  return Math.round(n).toLocaleString("en-US");
+}
+
+function fmtAmt(n) {
+  if (n === null || n === undefined || isNaN(n)) return "—";
+  return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function escHtml(s) {
+  if (!s) return "";
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function escAttr(s) {
+  if (!s) return "";
+  return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/\n/g,"");
+}
+
+// ============================================================
+// 启动
+// ============================================================
+window.addEventListener("DOMContentLoaded", init);
+</script>
+
+</body>
+</html>

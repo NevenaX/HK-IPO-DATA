@@ -1,0 +1,311 @@
+=== 清洗规则总览 ===
+规则总条数: 293
+  精确匹配: 288 条
+  包含匹配: 2 条
+  子串替换: 2 条
+  大小写不敏感: 1 条
+不同标准名: 85 个
+
+=== 标准名一览（按变体数降序）===
+  [12] Hillhouse 高瓴
+        <- Hillhouse
+        <- HHLRA
+        <- HHLRA 高瓴
+  [12] GBA 大湾区基金
+        <- GBA
+        <- 大湾区共同家园
+        <- 大湾区共同家园 (Mega Prime)
+  [ 8] IDG
+        <- IDG (Arc Avenue)
+        <- IDG Breyer Fund
+        <- IDG and Arc
+  [ 8] Perseverance 高毅
+        <- 高毅
+        <- 高毅投资
+        <- 高毅资产
+  [ 6] Boyu 博裕
+        <- Boyu
+        <- 博裕
+        <- 博裕 (Azure Skylines)
+  [ 6] CPE 源峰
+        <- CPE
+        <- CPE Investment
+        <- 源峰
+  [ 6] Tencent 腾讯
+        <- 腾讯
+        <- 腾讯控股
+        <- 腾讯 (Huang River Investment)
+  [ 6] Harvest 嘉实
+        <- 嘉实基金
+        <- 嘉实基金
+        <- 嘉实国际
+  [ 5] Xiaomi 小米
+        <- 小米集团
+        <- 小米集团 (Green Better)
+        <- 小米集团（Green Better）
+  [ 5] China AMC 华夏
+        <- 华夏基金
+        <- 华夏基金 (香港)
+        <- 华夏基金（香港）
+  [ 5] CPIC 太保
+        <- 中国太保
+        <- 中国太保 (太平洋资产管理)
+        <- 太保资管
+  [ 5] Cithara 信庭
+        <- 信庭 (Cithara)
+        <- 信庭 (Cithara基金)
+        <- 信庭 Cithara Fund
+  [ 5] RBC 加拿大皇家银行
+        <- RBC
+        <- RBC GAM
+        <- RBC（加拿大皇家银行）
+  [ 5] Temasek 淡马锡
+        <- 淡马锡
+        <- 淡马锡 (太白及True Light)
+        <- 淡马锡 (太白投资)
+  [ 5] Sage Partners 锐智
+        <- SAGE Partners
+        <- Sage Partners
+        <- Sage Partners Master Fund
+  [ 5] Schroders 施罗德
+        <- Schroders
+        <- Schroder Investment
+        <- 施罗德
+  [ 5] Eastspring 保诚
+        <- 保诚
+        <- 保诚 (Eastspring Investments)
+        <- 保诚 (Eastspring)
+  [ 4] HCEP 红杉
+        <- 红杉
+        <- 红杉资本
+        <- 红杉（HCEP Master Fund）
+  [ 4] Yunfeng 云锋
+        <- Yunfeng Capital
+        <- Yunfeng Investments (New Golden Future)
+        <- 云锋基金（New Alternative）
+  [ 4] GIC 新加坡政府投资公司
+        <- GIC
+        <- 新加坡政府投资公司
+        <- 新加坡政府投资公司(GIC)
+  [ 4] Morgan Stanley 摩根士丹利
+        <- Morgan Stanley
+        <- 摩根士丹利
+        <- 摩根士丹利（MSIP）
+  [ 4] Mirae Asset 未来资产
+        <- Mirae Asset
+        <- 未来资产
+        <- Mirae
+  [ 4] TruMed 真脉
+        <- TruMed
+        <- TruMed Healthcare
+        <- 真脉基金 TruMed
+  [ 4] Aspex
+        <- Aspex
+        <- Aspex Management
+        <- Aspex Management (Aspex Master Fund)
+  [ 4] Dymon Asia
+        <- Dymon Asia
+        <- Dymon Asia Capital
+        <- Dymon Asia（DAMSIMF）
+  [ 4] Exome
+        <- Exome
+        <- Exome Asset
+        <- WWHCP（Exome）
+  [ 4] WT Asset Management
+        <- WT
+        <- WT Asset Management
+        <- WT资产管理
+  [ 4] Wind Sabre 观博
+        <- Wind Sabre
+        <- 观博资本
+        <- 观博资本 (Wind Sabre)
+  [ 4] Oaktree 橡树资本
+        <- Oaktree
+        <- Oaktree Capital (橡树资本)
+        <- Oaktree Capital（橡树资本）
+  [ 4] Infini 无极资本
+        <- Infini
+        <- 无极资本 (Infini Global Master Fund)
+        <- 无极资本 (Infini)
+  [ 3] BlackRock 贝莱德
+        <- BlackRock
+        <- 贝莱德
+        <- 贝莱德集团
+  [ 3] 大家保险
+        <- 大家人寿
+        <- 大家保险
+        <- 大家资产
+  [ 3] Reynold Lemkins 瑞凯
+        <- 瑞凯集团
+        <- 瑞凯集团Reynold Lemkins
+        <- 刘浩然先生 (Reynold Lemkins)
+  [ 3] JPMorgan 摩根大通
+        <- JPM AM
+        <- JPMorgan AM
+        <- 摩根大通
+  [ 3] Fidelity 富达
+        <- 富达
+        <- 富达基金
+        <- 富达基金（Fidelity）
+  [ 3] 君怡香港
+        <- 君宜香港基金
+        <- 君宜（Dream'ee HK Fund）
+        <- Dream'ee HK Fund
+  [ 3] 源乐晟
+        <- 源乐晟（中金掉期）
+        <- 西藏源乐晟（TRS-CICC FT)
+        <- 源乐晟(中金TRS)
+  [ 3] 3W Fund
+        <- 3W
+        <- 3W Fund
+        <- 吴微威先生 (3W Fund)
+  [ 3] Janchor
+        <- Janchor
+        <- Janchor Fund
+        <- Janchor Partners
+  [ 3] Factorial
+        <- Factorial
+        <- Factorial Management (FMF)
+        <- FMF
+  [ 3] Huadeng Technology
+        <- Huadeng Technology
+        <- HuadengTechnology
+        <- HuadengTechnology Space Ventures
+  [ 3] MY.Alpha
+        <- MY.Alpha
+        <- MY Asian
+        <- MY.Alpha (MY Asian)
+  [ 3] Sanhua 三花智控
+        <- 三花智控
+        <- 三花智控 (三花国际新加坡)
+        <- 三花智控（好得易）
+  [ 3] ZTE 中兴
+        <- 中兴通讯
+        <- 中兴通讯（香港）
+        <- 中兴有限公司
+  [ 3] China Post 中邮
+        <- 中国邮政集团（中邮保险）
+        <- 中国邮政集团（中邮理财）
+        <- 中邮理财
+  [ 3] 复星
+        <- 复星国际
+        <- 复星国际 (Luminous Horizon)
+        <- Evergreen Gate（复星国际）
+  [ 3] 富国基金
+        <- 富国（富国基金&富国香港）
+        <- 富国
+        <- 富国香港/富国基金
+  [ 3] 易方达
+        <- 易方达基金
+        <- EFUND
+        <- 易方达香港/易方达基金
+  [ 3] 奥博资本 OrbiMed
+        <- OrbiMed 奥博亚洲四期
+        <- Orbimed
+        <- 奥博资本 Orbimed
+  [ 3] 泰康资管
+        <- 泰康人寿
+        <- 泰康国际
+        <- 泰康资产
+  [ 2] Mirae Asset Securities 未来资产证券
+        <- Mirae Asset Securities HK
+        <- 未来资产证券
+  [ 2] CDH 鼎晖
+        <- CDH
+        <- 鼎晖
+  [ 2] Baillie Gifford 柏基
+        <- Baillie Gifford
+        <- 柏基投资 Baillie Gifford
+  [ 2] Gallantlion Resources
+        <- Gallantlion Resources (Yield Royal Investment)
+        <- Gallatlion Resources (Yield Royal)
+  [ 2] 雾凇资本
+        <- 雾凇资本
+        <- 雾淞
+  [ 2] Pinpoint
+        <- Pinpoint
+        <- Pinpoint Asset Management
+  [ 2] Verition
+        <- Verition
+        <- Verition Fund Management
+  [ 2] Jain Global
+        <- Jain Global
+        <- Jain Global Master Fund
+  [ 2] North Rock
+        <- North Rock
+        <- North Rock基金
+  [ 2] Vivo Capital
+        <- Vivo Capital
+        <- Vivo基金
+  [ 2] Stoneylake Global
+        <- Stoneylake Global
+        <- Stoneylake Global Alpha Fund
+  [ 2] Oakwise
+        <- Oakwise
+        <- Oakwise Growth Fund
+  [ 2] RTW Investments
+        <- RTW Investments
+        <- RTW基金
+  [ 2] Lens Technology 蓝思
+        <- 蓝思科技（香港）
+        <- 蓝思香港
+  [ 2] Panjing 盘京
+        <- 盘京基金
+        <- 盘京投资
+  [ 2] 盈峰
+        <- 盈峰控股
+        <- 盈峰资本
+  [ 2] 睿远基金
+        <- 睿远
+        <- 睿远基金
+  [ 2] UBS 瑞银
+        <- 瑞银
+        <- 瑞银资管
+  [ 2] GTJA 国泰君安
+        <- 国泰君安证券
+        <- 国泰君安证券投资
+  [ 2] LVC 正心谷
+        <- 正心谷资本
+        <- 正心谷资本 (LVC)
+  [ 2] Ghisallo
+        <- Ghisallo
+        <- Ghisallo Fund
+  [ 2] Duckling Fund
+        <- Duckling Fund
+        <- Grandiflora Hook GP (Duckling Fund)
+  [ 2] M&G 英卓
+        <- M&G
+        <- M&G 英卓投资管理
+  [ 2] Ruihua 瑞华
+        <- Ruihua Investment
+        <- 瑞华投资
+  [ 2] Xingyu 星宇
+        <- 星宇车灯
+        <- 星宇香港
+  [ 2] 华置
+        <- 华置贸易
+        <- 华置（华宝股份）
+  [ 2] 北京金融控股
+        <- 北京金融控股
+        <- 北京金融控股集团（Huangshan SP）
+  [ 2] Tasly 天士力
+        <- 天士力（国际）
+        <- 天士力（香港）
+  [ 2] 明山资本
+        <- 明山资本
+        <- 明山资本 (Alphahill基金)
+  [ 2] 钟鼎资本
+        <- 钟鼎资本
+        <- 钟鼎资本八期
+  [ 2] LAV 礼来亚洲
+        <- LAV
+        <- LAV Star Opportunities
+  [ 2] 景林资产
+        <- 景林
+        <- 景林资管
+  [ 1] 禾荣科技
+        <- 禾荣科技合富(中国)
+  [ 1] Value Patners 惠理基金
+        <- 惠理
+  [ 1] 平安资管
+        <- 平安资产管理

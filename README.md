@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/31128573/README.md)
 # HK Cornerstone Investors — 网页部署与 PPT 更新
 
 这个目录已经可以直接部署为静态网站。`index.html` 是网站首页；核心数据来自 `data/data.js`。

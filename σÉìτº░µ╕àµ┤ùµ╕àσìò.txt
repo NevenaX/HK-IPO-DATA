@@ -1,0 +1,437 @@
+============================================================
+  港股 IPO 基石投资者数据库 — 名称清洗确认清单
+  生成时间: 2026-07-14 16:30:29
+============================================================
+
+【操作说明】
+  1. 看下面清单，找到你觉得应该是同一机构的不同写法
+  2. 把确认结果微信发给我，格式如：
+     "第1条合并" 或 "第5条保留原名"
+  3. 我收到后会更新规则，下次更新时自动生效
+
+------------------------------------------------------------
+【第一组：大概率是同一机构，可直接合并】
+
+  1. CPE Neem（CPE源峰）（1次）
+     → CPE 源峰（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  2. CPE River（CPE源峰）（1次）
+     → CPE 源峰（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  3. CPE源峰（CPE INVESTMENT XV）（1次）
+     → CPE 源峰（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  4. CPPIB（高瓴SMA）（1次）
+     → Hillhouse 高瓴（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  5. HHLRA（高瓴）（2次）
+     → Hillhouse 高瓴（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  6. HHLR（高瓴）（1次）
+     → Hillhouse 高瓴（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  7. Lion Global（1次）
+     → Jain Global（模糊匹配(82%) 82%）
+     确认合并? ___  保留原名? ___
+
+  8. Nanhai Asset Management（1次）
+     → WT Asset Management（模糊匹配(81%) 81%）
+     确认合并? ___  保留原名? ___
+
+  9. 中国太保（CPIC）（1次）
+     → CPIC 太保（中文名包含 80%）
+     确认合并? ___  保留原名? ___
+
+  10. 博裕（Boyu/Arcane Nexus）（1次）
+     → Boyu 博裕（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  11. 大湾区基金（1次）
+     → GBA 大湾区基金（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  12. 富达国际FIL（1次）
+     → Fidelity 富达（中文名包含 80%）
+     确认合并? ___  保留原名? ___
+
+  13. 景林（国泰君安TRS）（2次）
+     → GTJA 国泰君安（中文名包含 82%）
+     确认合并? ___  保留原名? ___
+
+  14. 橡树资本（Oaktree）（2次）
+     → Oaktree 橡树资本（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  15. 源峰(银河TRS)（1次）
+     → CPE 源峰（中文名包含 80%）
+     确认合并? ___  保留原名? ___
+
+  16. 璞信 (TRS-国泰君安)（1次）
+     → GTJA 国泰君安（中文名包含 82%）
+     确认合并? ___  保留原名? ___
+
+  17. 观澜 (TRS-国泰君安)（1次）
+     → GTJA 国泰君安（中文名包含 82%）
+     确认合并? ___  保留原名? ___
+
+  18. 贝莱德（BlackRock）（1次）
+     → BlackRock 贝莱德（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  19. 青岛观澜(TRS-国泰君安)（1次）
+     → GTJA 国泰君安（中文名包含 80%）
+     确认合并? ___  保留原名? ___
+
+  20. 高毅（Perseverance）（1次）
+     → Perseverance 高毅（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+  21. 鼎晖 CDH（1次）
+     → CDH 鼎晖（中文名相同 92%）
+     确认合并? ___  保留原名? ___
+
+------------------------------------------------------------
+【第二组：需要你判断的，不确定的问我】
+
+  22. AXA Investment（1次）
+     → 疑似: RTW Investments（模糊匹配(76%) 76%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  23. Alibaba Investment（1次）
+     → 疑似: RTW Investments（模糊匹配(67%) 67%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  24. All View Fund（1次）
+     → 疑似: 3W Fund（模糊匹配(60%) 60%）  ← 建议
+     → 疑似: Duckling Fund（模糊匹配(54%) 54%）
+     → 疑似: Baillie Gifford 柏基（模糊匹配(52%) 52%）
+     确认合并? ___  保留原名? ___
+
+  25. China Alpha（1次）
+     → 疑似: China AMC 华夏（模糊匹配(61%) 61%）  ← 建议
+     → 疑似: China Post 中邮（模糊匹配(58%) 58%）
+     → 疑似: MY.Alpha（模糊匹配(53%) 53%）
+     确认合并? ___  保留原名? ___
+
+  26. China Orient（1次）
+     → 疑似: China Post 中邮（模糊匹配(64%) 64%）  ← 建议
+     → 疑似: Pinpoint（模糊匹配(60%) 60%）
+     确认合并? ___  保留原名? ___
+
+  27. DeepRoot Partners（1次）
+     → 疑似: Sage Partners 锐智（模糊匹配(61%) 61%）  ← 建议
+     → 疑似: Value Patners 惠理基金（模糊匹配(51%) 51%）
+     确认合并? ___  保留原名? ___
+
+  28. Focustar Capital（1次）
+     → 疑似: Vivo Capital（模糊匹配(64%) 64%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  29. Himension Capital（1次）
+     → 疑似: Vivo Capital（模糊匹配(69%) 69%）  ← 建议
+     → 疑似: Dymon Asia（模糊匹配(52%) 52%）
+     确认合并? ___  保留原名? ___
+
+  30. Huadeng Victorious（1次）
+     → 疑似: Huadeng Technology（模糊匹配(61%) 61%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  31. Infore Capital（1次）
+     → 疑似: Vivo Capital（模糊匹配(77%) 77%）  ← 建议
+     → 疑似: Factorial（模糊匹配(52%) 52%）
+     确认合并? ___  保留原名? ___
+
+  32. Isometry Global（1次）
+     → 疑似: Stoneylake Global（模糊匹配(69%) 69%）  ← 建议
+     → 疑似: Jain Global（模糊匹配(62%) 62%）
+     确认合并? ___  保留原名? ___
+
+  33. JinYi Capital（1次）
+     → 疑似: Vivo Capital（模糊匹配(72%) 72%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  34. LYFE Capital（1次）
+     → 疑似: Vivo Capital（模糊匹配(67%) 67%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  35. Ninety One Asia（1次）
+     → 疑似: Dymon Asia（模糊匹配(64%) 64%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  36. Oasis（1次）
+     → 疑似: Oakwise（模糊匹配(67%) 67%）  ← 建议
+     → 疑似: Dymon Asia（模糊匹配(53%) 53%）
+     确认合并? ___  保留原名? ___
+
+  37. Ovata Capital（1次）
+     → 疑似: Vivo Capital（模糊匹配(72%) 72%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  38. Scene Cloud Global（1次）
+     → 疑似: Stoneylake Global（模糊匹配(63%) 63%）  ← 建议
+     → 疑似: Jain Global（模糊匹配(55%) 55%）
+     确认合并? ___  保留原名? ___
+
+  39. Springs Capital（2次）
+     → 疑似: Vivo Capital（模糊匹配(67%) 67%）  ← 建议
+     → 疑似: Pinpoint（模糊匹配(52%) 52%）
+     确认合并? ___  保留原名? ___
+
+  40. VVC Technology（2次）
+     → 疑似: Huadeng Technology（模糊匹配(69%) 69%）  ← 建议
+     → 疑似: Lens Technology 蓝思（模糊匹配(69%) 69%）
+     确认合并? ___  保留原名? ___
+
+  41. Wind Sabre(周大福)（1次）
+     → 疑似: Wind Sabre 观博（模糊匹配(71%) 71%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  42. Yield Royal Investment（1次）
+     → 疑似: RTW Investments（模糊匹配(65%) 65%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  43. Yishao Capital（2次）
+     → 疑似: Vivo Capital（模糊匹配(77%) 77%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  44. 汇添富基金（3次）
+     → 疑似: 富国基金（模糊匹配(67%) 67%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+  45. 瀚亚（Eastspring）（1次）
+     → 疑似: Eastspring 保诚（模糊匹配(74%) 74%）  ← 建议
+     确认合并? ___  保留原名? ___
+
+------------------------------------------------------------
+【第三组：以下 215 个为新机构，无需处理（仅供参考）】
+
+  46. ADIA（2次）
+  47. ADIA（阿布扎比投资局）（1次）
+  48. Aberdeen（1次）
+  49. Asia-Germany Industrial Promotion（1次）
+  50. Aspex（ASPEX MASTER FUND）（1次）
+  51. Athos（ATHOS CAPITAL）（1次）
+  52. Aurora SF(晶合集成)（1次）
+  53. Aurora SF（徐工集团）（1次）
+  54. Aurora SF（滨州国资委）（1次）
+  55. BPV(华泰资本TRS)（1次）
+  56. Barings（3次）
+  57. Bona Star（1次）
+  58. Bright Stone（1次）
+  59. CYGG (58集团)（1次）
+  60. Chample(李锋)（1次）
+  61. Charoen Pokphand Foods（1次）
+  62. China Orient Enhanced Income Fund (东方AMC)（1次）
+  63. Cloud Map（1次）
+  64. CloudAlpha（1次）
+  65. Cloudview（1次）
+  66. Cormorant（1次）
+  67. Deerfield（1次）
+  68. Deliante(旺旺家办)（1次）
+  69. Digital Vista GD Investment LP（1次）
+  70. Dream'ee（1次）
+  71. Dream‘ee（1次）
+  72. Erik Selin Fastigheter（1次）
+  73. Eternal Summer（1次）
+  74. Eurus（Orix）（1次）
+  75. FR M CONSULTING（1次）
+  76. FRM(张国锋)（1次）
+  77. First Quarter Moon(上弦月资管)（1次）
+  78. First Sentier(三菱)（1次）
+  79. Foresight（1次）
+  80. Foresight Funds（1次）
+  81. Franklin Templeton（1次）
+  82. GRANITE ASIA（2次）
+  83. Glencore PLC（1次）
+  84. Golden Continent(金洲证券)（1次）
+  85. Golden K2 Falcon（1次）
+  86. HHLRA高领（1次）
+  87. HK Greenwoods（1次）
+  88. Hel Ved（2次）
+  89. Hel Ved（HEL VED MASTER FUND）（1次）
+  90. Hesai HK（1次）
+  91. Hyperion Venture（1次）
+  92. Indus Funds（1次）
+  93. IvyRock（1次）
+  94. IvyRock 常春藤（1次）
+  95. JSC International（1次）
+  96. JSC International (Shenghai SP)(亦庄财政国资局)（1次）
+  97. Jane Street（3次）
+  98. Jump Trading（3次）
+  99. Jupiter Research（1次）
+  100. Kaide Global Investment（1次）
+  101. LMR（1次）
+  102. Lake Bleu（1次）
+  103. Libra Fixed Income One SP (庄家颖)（1次）
+  104. Loomis Sayles（1次）
+  105. MPC VII（1次）
+  106. Marshall Wace（1次）
+  107. Martis Fund（1次）
+  108. Metazone（TCL）（1次）
+  109. Millennium（4次）
+  110. Mondeomax（1次）
+  111. Monterey Park(臻鼎科技)（1次）
+  112. NGS Super（2次）
+  113. New China（1次）
+  114. NonaVerse（1次）
+  115. Nova Kerry(ACCF)（1次）
+  116. Nova Kerry（ACCF）（1次）
+  117. OCM（1次）
+  118. ODI TRUST（1次）
+  119. OPPO（1次）
+  120. ORIX Asia AM（1次）
+  121. Ocean Fine Industrial(通富微电子)（1次）
+  122. Optimas（1次）
+  123. Orchid Asia (Amazing Mountain)（1次）
+  124. Orix（2次）
+  125. Pacific Century Pines Investments 1（1次）
+  126. Polymer（1次）
+  127. QRT（2次）
+  128. QUALCOMM（1次）
+  129. Qin Wan（1次）
+  130. Qube（1次）
+  131. RTW（1次）
+  132. Redwood（1次）
+  133. Regal（1次）
+  134. Regal Gardens Fort Limited(Mingxin Growth Ventures)（1次）
+  135. Rome Garden（1次）
+  136. SHEEN NATION（1次）
+  137. SLD International（1次）
+  138. SNP China Enterprises (HSG Growth)（1次）
+  139. SR Wealth（1次）
+  140. Sanjin International（1次）
+  141. Schonfeld（1次）
+  142. Seven Grand（2次）
+  143. Shrewd Pioneer（1次）
+  144. SpreadCom Limited（1次）
+  145. Starwin International A LPF(洪泰证券)（1次）
+  146. Symbiosis（1次）
+  147. TCL（2次）
+  148. TT International（1次）
+  149. Tanwan（1次）
+  150. Tembusu(David Su)（1次）
+  151. Thalassa Capital（1次）
+  152. The Edgeof Korea (SCV Alpha)（1次）
+  153. Ti-Capital Funds（1次）
+  154. UG（1次）
+  155. Valliance（1次）
+  156. WuXi Biologics Venture（1次）
+  157. XINWUTANG（1次）
+  158. Yunteng Capital（1次）
+  159. Zhengxin Group（1次）
+  160. iFund（IFUND SPC-Vision IX SP）（1次）
+  161. 上海中移基金（1次）
+  162. 上海景林 (TRS-华泰)（1次）
+  163. 上海景林(TRS-华泰)（1次）
+  164. 上海陆家嘴(浦东国资委) (国泰君安TRS)（1次）
+  165. 东方AMC（2次）
+  166. 中兴通讯(香港)（1次）
+  167. 云顶新耀(康桥资本)（1次）
+  168. 亨通光电国际（1次）
+  169. 信安 PFG（1次）
+  170. 全顺(顺德国资委)（1次）
+  171. 凯博(宣城市国资委)（1次）
+  172. 前海合眾投資（1次）
+  173. 前海辰星投资（1次）
+  174. 加华裕丰 (Great China Motivation Fund)（1次）
+  175. 北京市国资委(璟泉启智(北京))（1次）
+  176. 千禧年（Millennium）（1次）
+  177. 千禧管理（MILLENNIUM）（1次）
+  178. 华勤新加坡（1次）
+  179. 华夏基金(香港)（1次）
+  180. 卡塔尔投资局 (Al-Rayyan)（1次）
+  181. 厦门先进制造业基金（1次）
+  182. 双诚资本(建投TRS)（1次）
+  183. 双赢科技（佰维存储）（1次）
+  184. 合肥建汇&芯耀投资(合肥国资委)（1次）
+  185. 名幸电子香港有限公司（1次）
+  186. 启源香港(山西省国资委)（1次）
+  187. 周大福家办（1次）
+  188. 嘉里控股 (Velmar Company)（1次）
+  189. 国海富兰克林（1次）
+  190. 国风投创新投(国资委)（1次）
+  191. 天进贸易 (OPPO)（1次）
+  192. 宁波国资委 (JSC International Investment)（1次）
+  193. 宁波市政府 (JSC International Investment Fund SPC)（1次）
+  194. 安擎计算机（1次）
+  195. 宏兴国际(胜宏科技)（1次）
+  196. 宝月湖深产投共赢企业管理有限公司（1次）
+  197. 富国(富国基金&富国香港)（1次）
+  198. 山东发展投资控股集团 (国惠香港)（1次）
+  199. 山东国惠(山东省国资委)（2次）
+  200. 工银瑞信实体（1次）
+  201. 康成亨远景投资 (诸暨市财政局)（1次）
+  202. 开盘财富管理有限公司（1次）
+  203. 彭年集团（Purple Diamond Ltd）（1次）
+  204. 恒邦私募(银河TRS)（1次）
+  205. 惠州国资委 (惠州惠联)（1次）
+  206. 拾贝能信及自然拾贝 (TRS-华泰)（1次）
+  207. 摩根资管 JPM AM（2次）
+  208. 新亚洲富怡（1次）
+  209. 无锡金筹 (TRS-国泰海通)（1次）
+  210. 易亚投资管理（1次）
+  211. 晋达（Ninety One Asia）（1次）
+  212. 景林(中金TRS)（1次）
+  213. 晶合集成(合肥国资委)（1次）
+  214. 智感微电子（1次）
+  215. 梅赛德斯-奔驰集团（1次）
+  216. 欣旺达电子（1次）
+  217. 欣旺达香港（1次）
+  218. 欧万达基金（1次）
+  219. 正大机器人（1次）
+  220. 永联投资(永卓控股)（1次）
+  221. 汇添富（香港）（1次）
+  222. 江西省政府 (江西铜业) (TRS-国泰君安)（1次）
+  223. 河南省国资委(香港豫农国际)（1次）
+  224. 海燿实业(通富微电子)（1次）
+  225. 涌容资产管理（1次）
+  226. 深圳新世界（1次）
+  227. 深圳新宙邦（1次）
+  228. 清华教育基金会（1次）
+  229. 清池资本 Lake Bleu（1次）
+  230. 灏浚投资(华泰TRS)（1次）
+  231. 睿郡资产(华泰TRS)（1次）
+  232. 胜宏科技 (宏兴国际)（1次）
+  233. 苏州高新区（太湖金谷及科发集团）（1次）
+  234. 荣耀(深圳国资委)（1次）
+  235. 蓝思科技(香港)（1次）
+  236. 蔡东晨(石药集团执行董事长)（1次）
+  237. 衡信基金管理 (TRS-华泰)（1次）
+  238. 裕祥(网誉科技)（1次）
+  239. 豪恩 (TRS-CICC FT)（1次）
+  240. 进益(天津)资产管理（1次）
+  241. 远信投资(银河TRS)（1次）
+  242. 通富微电子（1次）
+  243. 金融街资本（国务院国资委）（1次）
+  244. 锐明电子有限公司（1次）
+  245. 长沙雨丰(长沙雨花区政府)（1次）
+  246. 阿里巴巴 (Alisoft China)（2次）
+  247. 阿里巴巴（Alibaba Investment）（1次）
+  248. 隆威香港(保隆汽车)（1次）
+  249. 雄安自动驾驶（1次）
+  250. 集创（含合肥集创香港及集创香港）（1次）
+  251. 霸菱 Barings（1次）
+  252. 霸菱Barings（1次）
+  253. 青岛国资委 (利冠)（1次）
+  254. 香港汉清达（1次）
+  255. 高毅资产(华泰TRS)（1次）
+  256. 高盛资产管理（2次）
+  257. 高盛资管（GSAM）（1次）
+  258. 高腾(中金TRS)（1次）
+  259. 黄河（Huang River，腾讯旗下）（1次）
+  260. 黄雪林(胜蓝科技)（1次）
+
+------------------------------------------------------------
+
+【汇总】共 260 个未覆盖名称
+  - 建议合并: 21 个（第一组）
+  - 待确认: 24 个（第二组）
+  - 新机构: 215 个（无需处理）
+
+确认后把标记结果截图发给我即可。
