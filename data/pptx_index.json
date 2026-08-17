@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "processed_files": {
+    "2025基石_1231.pptx": {
+      "sha256": "6411b7e8381a627b7dfc9989c148940b0fb5459683e7ff310454a46061d28237",
+      "size": 1345183,
+      "record_count": 0
+    },
+    "2026基石_0622.pptx": {
+      "sha256": "9df33d0b09a71e22d181fc5b41e310d976f2330555e8bb09eae369b47c2d666b",
+      "size": 1315835,
+      "record_count": 0
+    },
+    "2026基石_0706.pptx": {
+      "sha256": "5d6881cd79c011cdc92692def5a11b0dbbb2250c1e28954a88bd496bca5ec3d5",
+      "size": 1341278,
+      "record_count": 0
+    },
+    "2026基石_0713.pptx": {
+      "sha256": "20ca88de64446bc3bdcf82c763d7783c3fc311c9d1312d3e160584f4caa9cf1d",
+      "size": 1358715,
+      "record_count": 0
+    },
+    "2026基石_0803.pptx": {
+      "sha256": "ef4bc093d1e8fcec23e395b222cb0214a9944266fde636b356cfc54dce3c8a05",
+      "size": 1363397,
+      "record_count": 0
+    }
+  },
+  "last_updated": "2026-08-17"
+}
