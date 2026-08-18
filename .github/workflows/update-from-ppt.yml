@@ -46,15 +46,11 @@ jobs:
         run: python scripts/bundle_standalone.py
 
       - name: Commit generated website data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/data.json data/data.js data/.pptx_index.json \
-                  data/ipo_details.json data/ipo_details.js \
-                  hk_cornerstone_investors_standalone.html
-          if git diff --cached --quiet; then
-            echo "No generated changes to commit."
-          else
-            git commit -m "Auto-update website data from PPT"
-            git push
-          fi
+      run:|
+      git config user.name "github-actions[bot]"
+      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      git add .
+      git commit -m "Auto-update website data from PPT" || exit 0
+      git pull --rebase origin main
+      git push origin main
+      fi
