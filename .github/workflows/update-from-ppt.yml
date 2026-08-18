@@ -53,4 +53,3 @@ jobs:
           git commit -m "Auto-update website data from PPT" || exit 0
           git pull --rebase origin main
           git push origin main
-          fi
