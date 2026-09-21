@@ -356,8 +356,8 @@ function sortData() {
   filteredData.sort((a, b) => {
     let va, vb;
     if (field === "listing_date") {
-      va = getListingDate(a.stock_code) || "";
-      vb = getListingDate(b.stock_code) || "";
+      va = getListingDate(a.stock_code) || a.princing_date || "";
+      vb = getListingDate(b.stock_code) || b.princing_date || "";
     } else if (field === "unlock_return") {
       va = getUnlockReturn(a.stock_code);
       vb = getUnlockReturn(b.stock_code);
