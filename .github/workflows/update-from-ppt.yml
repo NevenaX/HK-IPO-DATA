@@ -36,8 +36,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Extract new PPT data
-        run: python scripts/extract_pptx.py --incremental
+      - name: Rebuild all PPT data
+        run: python scripts/extract_pptx.py --force
 
       - name: Compile IPO detail placeholders
         run: python scripts/compile_ipo_details.py
