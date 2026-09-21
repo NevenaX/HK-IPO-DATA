@@ -1,6 +1,6 @@
 // ipo_details.js — 自动生成，请勿手动修改
-// 生成时间: 2026-09-21 08:12:43
-// 覆盖 169 只港股
+// 生成时间: 2026-09-21 08:18:19
+// 覆盖 164 只港股
 
 window.ipoDetails = {
   "0068.HK": {
@@ -1017,19 +1017,6 @@ window.ipoDetails = {
     "incorporation_date": "1999-04-17",
     "registered_capital": "95,950,005 CNY"
   },
-  "2672.HK": {
-    "issue_price": 15.6,
-    "net_proceeds_mn": 465.8,
-    "sponsors": "民银资本,中银国际亚洲",
-    "stabilizing_agent": "民银证券有限公司",
-    "lot_size": 200,
-    "board": "主板",
-    "overallotment_shares": 0,
-    "public_sub_multiple": null,
-    "intl_sub_multiple": null,
-    "incorporation_date": null,
-    "registered_capital": null
-  },
   "2675.HK": {
     "issue_price": 43.24,
     "net_proceeds_mn": 1117.0,
@@ -1055,19 +1042,6 @@ window.ipoDetails = {
     "intl_sub_multiple": 2.65,
     "incorporation_date": "2013-05-17",
     "registered_capital": "162,623,433 CNY"
-  },
-  "2677.HK": {
-    "issue_price": 59.9,
-    "net_proceeds_mn": 208.9,
-    "sponsors": "海通国际资本,浦银国际",
-    "stabilizing_agent": "海通国际证券有限公司",
-    "lot_size": 50,
-    "board": "主板",
-    "overallotment_shares": 196100,
-    "public_sub_multiple": 2731.0,
-    "intl_sub_multiple": 5.79,
-    "incorporation_date": "2014-02-13",
-    "registered_capital": "100,319 USD"
   },
   "2692.HK": {
     "issue_price": 71.28,
@@ -1198,19 +1172,6 @@ window.ipoDetails = {
     "intl_sub_multiple": 19.85,
     "incorporation_date": "2023-07-04",
     "registered_capital": "50,000 USD"
-  },
-  "2797.HK": {
-    "issue_price": null,
-    "net_proceeds_mn": null,
-    "sponsors": null,
-    "stabilizing_agent": null,
-    "lot_size": null,
-    "board": null,
-    "overallotment_shares": null,
-    "public_sub_multiple": null,
-    "intl_sub_multiple": null,
-    "incorporation_date": null,
-    "registered_capital": null
   },
   "2865.HK": {
     "issue_price": 22.15,
@@ -1732,19 +1693,6 @@ window.ipoDetails = {
     "incorporation_date": "2022-05-24",
     "registered_capital": "23,322,303 CNY"
   },
-  "6658.HK": {
-    "issue_price": 43.58,
-    "net_proceeds_mn": 440.1,
-    "sponsors": "中信里昂证券,中信建投(国际)融资,国元证券经纪(香港),东方证券(香港),中泰国际证券",
-    "stabilizing_agent": null,
-    "lot_size": 100,
-    "board": "主板",
-    "overallotment_shares": 0,
-    "public_sub_multiple": null,
-    "intl_sub_multiple": null,
-    "incorporation_date": null,
-    "registered_capital": null
-  },
   "6675.HK": {
     "issue_price": 18.36,
     "net_proceeds_mn": 912.5,
@@ -1872,19 +1820,6 @@ window.ipoDetails = {
     "overallotment_shares": null,
     "public_sub_multiple": null,
     "intl_sub_multiple": null,
-    "incorporation_date": null,
-    "registered_capital": null
-  },
-  "6915.HK": {
-    "issue_price": 11.2,
-    "net_proceeds_mn": 338.8,
-    "sponsors": "中金香港证券,招商证券(香港),国信证券(香港),富途证券国际(香港)",
-    "stabilizing_agent": "中国国际金融香港证券有限公司",
-    "lot_size": 500,
-    "board": "主板",
-    "overallotment_shares": null,
-    "public_sub_multiple": 476.6,
-    "intl_sub_multiple": 4.25,
     "incorporation_date": null,
     "registered_capital": null
   },
