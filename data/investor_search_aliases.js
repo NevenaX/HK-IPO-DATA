@@ -318,8 +318,8 @@ window.investorSearchAliases = {
   ],
   "Optimas 中庸": [
     "Optimas 中庸",
-    "Optimas",
     "optimas",
+    "Optimas",
     "Optimas Capital",
     "optimas capital",
     "中庸",
