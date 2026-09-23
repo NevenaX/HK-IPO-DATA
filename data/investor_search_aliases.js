@@ -74,9 +74,11 @@ window.investorSearchAliases = {
   "CloudAlpha 奇点资产": [
     "CloudAlpha 奇点资产",
     "Cloud Alpha",
-    "CloudAlpha",
     "cloudalpha",
-    "奇点资产"
+    "CloudAlpha",
+    "奇点",
+    "奇点资产",
+    "奇点资本"
   ],
   "CPE 源峰": [
     "CPE 源峰",
@@ -320,8 +322,8 @@ window.investorSearchAliases = {
   ],
   "Optimas 中庸": [
     "Optimas 中庸",
-    "optimas",
     "Optimas",
+    "optimas",
     "Optimas Capital",
     "optimas capital",
     "中庸",
@@ -373,8 +375,8 @@ window.investorSearchAliases = {
   ],
   "Sage Partners 锐智": [
     "Sage Partners 锐智",
-    "SAGE Partners",
     "Sage Partners",
+    "SAGE Partners",
     "Sage Partners Master Fund",
     "锐智资本&Sage Sunshine",
     "锐智资本（Sage Partners）"
@@ -521,8 +523,8 @@ window.investorSearchAliases = {
   "奥博资本 OrbiMed": [
     "奥博资本 Orbimed",
     "奥博资本 OrbiMed",
-    "orbimed",
     "Orbimed",
+    "orbimed",
     "OrbiMed 奥博亚洲四期"
   ],
   "富国基金": [
