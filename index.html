@@ -8,6 +8,7 @@
 <script src="data/data.js"></script>
 <script src="data/company_info.js"></script>
 <script src="data/ipo_details.js"></script>
+<script src="data/investor_aliases.json"></script>
 <style>
   body { font-family: -apple-system, "Segoe UI", Roboto, "Noto Sans SC", sans-serif; }
 
@@ -331,11 +332,25 @@ function applyFilters() {
       if (yearStr !== yr) return false;
     }
     if (kw) {
-      const m1 = d.investor_name && d.investor_name.toLowerCase().includes(kw);
-      const m2 = d.company_name && d.company_name.toLowerCase().includes(kw);
-      const m3 = d.stock_code && d.stock_code.toLowerCase().includes(kw);
-      if (!m1 && !m2 && !m3) return false;
-    }
+  const investorName = d.investor_name || "";
+
+  const aliases =
+    (window.investorSearchAliases &&
+     window.investorSearchAliases[investorName]) || [];
+
+  const investorSearchText =
+    [investorName, ...aliases]
+      .join(" ")
+      .toLowerCase();
+
+  const m1 = investorSearchText.includes(kw);
+  const m2 = d.company_name &&
+             d.company_name.toLowerCase().includes(kw);
+  const m3 = d.stock_code &&
+             d.stock_code.toLowerCase().includes(kw);
+
+  if (!m1 && !m2 && !m3) return false;
+	}
     if (ind !== "all") {
       const mainInd = d.industry ? d.industry.split("/")[0].trim() : "";
       if (mainInd !== ind) return false;
