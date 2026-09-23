@@ -47,9 +47,6 @@ jobs:
 
       - name: Build website
         run: python scripts/build_site.py
-        
-      - name: Build standalone copy
-        run: python scripts/bundle_standalone.py
 
       - name: Commit generated website data
         run: |
