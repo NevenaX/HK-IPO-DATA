@@ -39,9 +39,15 @@ jobs:
       - name: Rebuild all PPT data
         run: python scripts/extract_pptx.py --force
 
+      - name: Build investor search aliases
+        run: python scripts/build_investor_search_aliases.py
+
       - name: Compile IPO detail placeholders
         run: python scripts/compile_ipo_details.py
 
+      - name: Build website
+        run: python scripts/build_site.py
+        
       - name: Build standalone copy
         run: python scripts/bundle_standalone.py
 
@@ -49,7 +55,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
+          git add data/data.json data/data.js data/.pptx_index.json data/ipo_details.json data/ipo_details.js data/investor_search_aliases.js public/
           git commit -m "Auto-update website data from PPT" || exit 0
           git pull --rebase origin main
           git push origin main
