@@ -71,6 +71,11 @@ window.investorSearchAliases = {
     "信庭 Cithara Fund",
     "信庭基金"
   ],
+  "CloudAlpha 奇点资产": [
+    "CloudAlpha 奇点资产",
+    "CloudAlpha",
+    "奇点资产"
+  ],
   "CPE 源峰": [
     "CPE 源峰",
     "CPE",
@@ -315,8 +320,8 @@ window.investorSearchAliases = {
     "Optimas 中庸",
     "Optimas",
     "optimas",
-    "optimas capital",
     "Optimas Capital",
+    "optimas capital",
     "中庸",
     "中庸资本"
   ],
@@ -514,8 +519,8 @@ window.investorSearchAliases = {
   "奥博资本 OrbiMed": [
     "奥博资本 Orbimed",
     "奥博资本 OrbiMed",
-    "orbimed",
     "Orbimed",
+    "orbimed",
     "OrbiMed 奥博亚洲四期"
   ],
   "富国基金": [
