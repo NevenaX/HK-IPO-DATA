@@ -1,6 +1,6 @@
 // ipo_details.js — 自动生成，请勿手动修改
-// 生成时间: 2026-09-23 03:21:22
-// 覆盖 164 只港股
+// 生成时间: 2026-10-08 06:50:16
+// 覆盖 169 只港股
 
 window.ipoDetails = {
   "0068.HK": {
@@ -1225,6 +1225,19 @@ window.ipoDetails = {
     "incorporation_date": null,
     "registered_capital": null
   },
+  "3228.HK": {
+    "issue_price": null,
+    "net_proceeds_mn": null,
+    "sponsors": null,
+    "stabilizing_agent": null,
+    "lot_size": null,
+    "board": null,
+    "overallotment_shares": null,
+    "public_sub_multiple": null,
+    "intl_sub_multiple": null,
+    "incorporation_date": null,
+    "registered_capital": null
+  },
   "325.HK": {
     "issue_price": 60.35,
     "net_proceeds_mn": 1557.0,
@@ -1434,6 +1447,19 @@ window.ipoDetails = {
     "registered_capital": "4,626,627,170 CNY"
   },
   "3752.HK": {
+    "issue_price": null,
+    "net_proceeds_mn": null,
+    "sponsors": null,
+    "stabilizing_agent": null,
+    "lot_size": null,
+    "board": null,
+    "overallotment_shares": null,
+    "public_sub_multiple": null,
+    "intl_sub_multiple": null,
+    "incorporation_date": null,
+    "registered_capital": null
+  },
+  "3757.HK": {
     "issue_price": null,
     "net_proceeds_mn": null,
     "sponsors": null,
@@ -1758,6 +1784,19 @@ window.ipoDetails = {
     "incorporation_date": null,
     "registered_capital": null
   },
+  "6731.HK": {
+    "issue_price": null,
+    "net_proceeds_mn": null,
+    "sponsors": null,
+    "stabilizing_agent": null,
+    "lot_size": null,
+    "board": null,
+    "overallotment_shares": null,
+    "public_sub_multiple": null,
+    "intl_sub_multiple": null,
+    "incorporation_date": null,
+    "registered_capital": null
+  },
   "6745.HK": {
     "issue_price": null,
     "net_proceeds_mn": null,
@@ -1953,6 +1992,19 @@ window.ipoDetails = {
     "incorporation_date": "2019-07-03",
     "registered_capital": "20,000 USD"
   },
+  "9607.HK": {
+    "issue_price": null,
+    "net_proceeds_mn": null,
+    "sponsors": null,
+    "stabilizing_agent": null,
+    "lot_size": null,
+    "board": null,
+    "overallotment_shares": null,
+    "public_sub_multiple": null,
+    "intl_sub_multiple": null,
+    "incorporation_date": null,
+    "registered_capital": null
+  },
   "9609.HK": {
     "issue_price": 14.28,
     "net_proceeds_mn": 451.8,
@@ -2030,6 +2082,19 @@ window.ipoDetails = {
     "intl_sub_multiple": 1.7,
     "incorporation_date": "2012-06-29",
     "registered_capital": "71,967,593 CNY"
+  },
+  "9856.HK": {
+    "issue_price": null,
+    "net_proceeds_mn": null,
+    "sponsors": null,
+    "stabilizing_agent": null,
+    "lot_size": null,
+    "board": null,
+    "overallotment_shares": null,
+    "public_sub_multiple": null,
+    "intl_sub_multiple": null,
+    "incorporation_date": null,
+    "registered_capital": null
   },
   "9881.HK": {
     "issue_price": 10.0,
