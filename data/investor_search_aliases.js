@@ -395,6 +395,11 @@ window.investorSearchAliases = {
     "施罗德",
     "施罗德集团"
   ],
+  "Springs Capital 淡水泉": [
+    "Springs Capital 淡水泉",
+    "Springs Capital",
+    "淡水泉"
+  ],
   "Stoneylake Global": [
     "Stoneylake Global",
     "Stoneylake Global Alpha Fund"
@@ -521,8 +526,8 @@ window.investorSearchAliases = {
     "大家资产"
   ],
   "奥博资本 OrbiMed": [
-    "奥博资本 Orbimed",
     "奥博资本 OrbiMed",
+    "奥博资本 Orbimed",
     "Orbimed",
     "orbimed",
     "OrbiMed 奥博亚洲四期"
