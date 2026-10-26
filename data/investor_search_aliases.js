@@ -74,8 +74,8 @@ window.investorSearchAliases = {
   "CloudAlpha 奇点资产": [
     "CloudAlpha 奇点资产",
     "Cloud Alpha",
-    "CloudAlpha",
     "cloudalpha",
+    "CloudAlpha",
     "奇点",
     "奇点资产",
     "奇点资本"
@@ -528,8 +528,8 @@ window.investorSearchAliases = {
   "奥博资本 OrbiMed": [
     "奥博资本 Orbimed",
     "奥博资本 OrbiMed",
-    "Orbimed",
     "orbimed",
+    "Orbimed",
     "OrbiMed 奥博亚洲四期"
   ],
   "富国基金": [
