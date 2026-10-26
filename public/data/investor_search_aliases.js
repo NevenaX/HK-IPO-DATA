@@ -322,8 +322,8 @@ window.investorSearchAliases = {
   ],
   "Optimas 中庸": [
     "Optimas 中庸",
-    "Optimas",
     "optimas",
+    "Optimas",
     "Optimas Capital",
     "optimas capital",
     "中庸",
@@ -375,8 +375,8 @@ window.investorSearchAliases = {
   ],
   "Sage Partners 锐智": [
     "Sage Partners 锐智",
-    "Sage Partners",
     "SAGE Partners",
+    "Sage Partners",
     "Sage Partners Master Fund",
     "锐智资本&Sage Sunshine",
     "锐智资本（Sage Partners）"
@@ -526,8 +526,8 @@ window.investorSearchAliases = {
     "大家资产"
   ],
   "奥博资本 OrbiMed": [
-    "奥博资本 OrbiMed",
     "奥博资本 Orbimed",
+    "奥博资本 OrbiMed",
     "Orbimed",
     "orbimed",
     "OrbiMed 奥博亚洲四期"
