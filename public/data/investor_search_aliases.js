@@ -324,8 +324,8 @@ window.investorSearchAliases = {
     "Optimas 中庸",
     "optimas",
     "Optimas",
-    "Optimas Capital",
     "optimas capital",
+    "Optimas Capital",
     "中庸",
     "中庸资本"
   ],
@@ -528,8 +528,8 @@ window.investorSearchAliases = {
   "奥博资本 OrbiMed": [
     "奥博资本 Orbimed",
     "奥博资本 OrbiMed",
-    "orbimed",
     "Orbimed",
+    "orbimed",
     "OrbiMed 奥博亚洲四期"
   ],
   "富国基金": [
