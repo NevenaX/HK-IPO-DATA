@@ -322,10 +322,10 @@ window.investorSearchAliases = {
   ],
   "Optimas 中庸": [
     "Optimas 中庸",
-    "optimas",
     "Optimas",
-    "optimas capital",
+    "optimas",
     "Optimas Capital",
+    "optimas capital",
     "中庸",
     "中庸资本"
   ],
@@ -375,8 +375,8 @@ window.investorSearchAliases = {
   ],
   "Sage Partners 锐智": [
     "Sage Partners 锐智",
-    "SAGE Partners",
     "Sage Partners",
+    "SAGE Partners",
     "Sage Partners Master Fund",
     "锐智资本&Sage Sunshine",
     "锐智资本（Sage Partners）"
